@@ -19,6 +19,12 @@
   --volume /srv/gitlab/logs:/var/log/gitlab \
   --volume /srv/gitlab/data:/var/opt/gitlab \
   gitlab/gitlab-ce:latest
+  
+  Backup STRATEGY=copy para evitar file changed as we read it https://docs.gitlab.com/omnibus/settings/backups.html
+  > docker exec -t <container> gitlab-rake gitlab:backup:create
+  Realizar Backup das Configurações 
+  > docker exec -t <container> /bin/sh -c 'umask 0077; tar cfz /secret/gitlab/backups/$(date "+etc-gitlab-\%s.tgz") -C / etc/gitlab'
+  You need to have volumes mounted at /secret/gitlab/backups and /var/opt/gitlab in order to have these backups persisted outside the container.
 
 - Sonar https://hub.docker.com/_/sonarqube
 > $ docker run --name sonarqube -p 9001:9000 -e sonar.jdbc.username=postgres -e sonar.jdbc.password=postgres -e sonar.jdbc.url=jdbc:postgresql://127.0.0.1/sonar -v /dados/sonarqube:/opt/sonarqube -d sonarqube
