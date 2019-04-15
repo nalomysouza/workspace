@@ -31,3 +31,6 @@
 
 - PGadmin4 (https://hub.docker.com/r/dpage/pgadmin4/)
 > $ docker run -p 9004:80 -e "PGADMIN_DEFAULT_EMAIL=user@domain.com" -e "PGADMIN_DEFAULT_PASSWORD=SuperSecret" -d dpage/pgadmin4
+
+- Keycloack (https://hub.docker.com/r/jboss/keycloak/)
+> $ docker run -e KEYCLOAK_USER=keycloak -e KEYCLOAK_PASSWORD=keycloak -e DB_ADDR=db -e DB_DATABASE=keycloak -e DB_USER=postgres -e DB_PASSWORD=postgres jboss/keycloak -p 9006:8080
